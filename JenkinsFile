@@ -8,16 +8,6 @@ pipeline {
             }
         }
         
-        stage('Set up Node') {
-            steps {
-                script {
-                    // Använder Node Version Manager för att installera och använda rätt Node.js-version
-                    def nvmHome = tool name: 'NVM', type: 'nvm'
-                    sh "source ${nvmHome}/nvm.sh && nvm install 20.12.1 && nvm use 20.12.1"
-                }
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'  // Detta steg installerar alla nödvändiga beroenden

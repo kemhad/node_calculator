@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/.bin/jest"
+    "test": "jest",
+    "unit-test": "node ./node_modules/jest/bin/jest.js __tests__/unit/unit.test.js",
+    "integration-test": "node ./node_modules/jest/bin/jest.js __tests__/integration/int.test.js"
   },
   "author": "Patrik Nygren",
   "license": "ISC",
@@ -14,7 +16,8 @@
     "express": "^4.19.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.24.3",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "regenerator-runtime": "^0.14.1",

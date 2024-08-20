@@ -1,0 +1,39 @@
+pipeline {
+    agent any  // Detta anger att pipeline kan köras på vilken tillgänglig agent som helst
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm  // Detta steg hämtar den senaste koden från SCM (Source Control Management)
+            }
+        }
+        
+        stage('Set up Node') {
+            steps {
+                script {
+                    // Använder Node Version Manager för att installera och använda rätt Node.js-version
+                    def nvmHome = tool name: 'NVM', type: 'nvm'
+                    sh "source ${nvmHome}/nvm.sh && nvm install 20.12.1 && nvm use 20.12.1"
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'  // Detta steg installerar alla nödvändiga beroenden
+            }
+        }
+
+        stage('Run Unit Tests') {
+            steps {
+                sh 'npm run unit-test'  // Kör enhetstester
+            }
+        }
+
+        stage('Run Integration Tests') {
+            steps {
+                sh 'npm run integration-test'  // Kör integrationstester
+            }
+        }
+    }
+}
